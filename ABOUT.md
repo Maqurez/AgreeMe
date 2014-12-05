@@ -1,3 +1,7 @@
 # AgreeMe!
 
-Tool for creation nice-look Licence Agreement & etc.
+Tool for creation nice-looking Licence Agreement & etc.
+
+##
+
+Create your agreement easy. 
