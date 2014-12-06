@@ -33,10 +33,12 @@
                     <li class="rule alert">
                         <img src="images/alert.png">insult others
                         <ul class="rules nested">
-                            <li class="add">...</li>
+                            <li class="add"><img src="images/more.png"></li>
+                            <li class="field"><input class="field-input" type="text"/></li>
                         </ul>
                     </li>
-                    <li class="add">...</li>
+                    <li class="add"><img src="images/more.png"></li>
+                    <li class="field"><input class="field-input" type="text"/></li>
                 </ul>
             </li>
             <li class="rule deny">
@@ -48,26 +50,26 @@
                             <li class="rule alert">
                                 <img src="images/alert.png">Other other thing
                                 <ul class="rules nested">
-                                    <li class="add">...</li>
+                                    <li class="add"><img src="images/more.png"></li>
                                     <li class="field"><input class="field-input" type="text"/></li>
                                 </ul>
                             </li>
-                            <li class="add">...</li>
+                            <li class="add"><img src="images/more.png"></li>
                             <li class="field"><input class="field-input" type="text"/></li>
                         </ul>
                     </li>
-                    <li class="add">...</li>
+                    <li class="add"><img src="images/more.png"></li>
                     <li class="field"><input class="field-input" type="text"/></li>
                 </ul>
             </li>
             <li class="rule info">
                 <img src="images/info.png">Information
                 <ul class="rules nested">
-                    <li class="add">...</li>
+                    <li class="add"><img src="images/more.png"></li>
                     <li class="field"><input class="field-input" type="text"/></li>
                 </ul>
             </li>
-            <li class="add">...</li>
+            <li class="add"><img src="images/more.png"></li>
             <li class="field"><input class="field-input" type="text"/></li>
         </ul>
     </div>
