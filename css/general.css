@@ -21,3 +21,9 @@ img {
     overflow: hidden;
     clear: both;
 }
+.rule-type {
+    border: 1px solid #fff;
+}
+.selected {
+    border: 1px solid #008;
+}

@@ -2,48 +2,26 @@
  * Created by Maqurez on 12/6/2014.
  */
 
-window.onload = function() {
-    var adds = document.getElementsByClassName('add');
-    for (var i = 0; i < adds.length; i++) {
-        adds[i].addEventListener('click', showField);
-    }
+$(document).ready(function() {
 
-    var fields = document.getElementsByClassName('field-input');
-    for (i = 0; i < fields.length; i++) {
-        fields[i].addEventListener('focusout', addRule);
-    }
-};
+    // Add event
 
+    $('.add-img').click(function() {
+        $($(this).parent().parent()).children().toggle();
+    });
 
-function addRule() {
-    console.log("focus lost");
-    console.log(this.parentNode);
-    if (this.value != "") {
-        this.parentNode.className = "rule";
-        this.parentNode.innerHTML = this.value;
-    }
-    else hideField(this);
-}
+    $('.rule-type').click(function() {
+        $($(this).parent()).children().removeClass('selected');
+        $(this).addClass('selected');
+    });
 
-function addButs() {
+    // !!! Write a image pick !!!
 
-}
-
-function showField() {
-    var p = this.parentNode;
-    var ch = p.childNodes;
-    for (var i = 0; i < ch.length; i++) {
-        if (ch[i].className == 'field') ch[i].style.display = 'block';
-        if (ch[i].className == 'add') ch[i].style.display = 'none';
-    }
-}
-
-function toggleField() {
-    var p = this.parentNode;
-    // if open - close
-    var ch = p.childNodes;
-    for (var i = 0; i < ch.length; i++) {
-        if (ch[i].className == 'field') ch[i].style.display = 'none';
-        if (ch[i].className == 'add') ch[i].style.display = 'block';
-    }
-}
+    $('.button-add').click(function() {
+        var t = $($(this).parent().parent());
+        console.log("Rule added!");
+        t.append('<li class="rule">' + $(t).children('.field').children('.field-input')[0].value + '</li>');
+        t.children('.field').remove();
+        t.children('.add').remove();
+    });
+});

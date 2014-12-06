@@ -13,6 +13,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/general.css" />
+    <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
@@ -28,48 +29,31 @@
     <div class="main container">
         <ul class="rules">
             <li class="rule allow">
-                <img src="images/allow.png">write comments
+                <img class="rule-image" src="images/allow.png">
+                <span class="rule-text">write comments</span>
                 <ul class="rules nested">
                     <li class="rule alert">
-                        <img src="images/alert.png">insult others
+                        <img class="rule-image" src="images/alert.png">
+                        <span class="rule-text">insult others</span>
                         <ul class="rules nested">
-                            <li class="add"><img src="images/more.png"></li>
-                            <li class="field"><input class="field-input" type="text"/></li>
-                        </ul>
-                    </li>
-                    <li class="add"><img src="images/more.png"></li>
-                    <li class="field"><input class="field-input" type="text"/></li>
-                </ul>
-            </li>
-            <li class="rule deny">
-                <img src="images/deny.png">Something
-                <ul class="rules nested">
-                    <li class="rule alert">
-                        <img src="images/alert.png">Other thing
-                        <ul class="rules nested">
-                            <li class="rule alert">
-                                <img src="images/alert.png">Other other thing
-                                <ul class="rules nested">
-                                    <li class="add"><img src="images/more.png"></li>
-                                    <li class="field"><input class="field-input" type="text"/></li>
-                                </ul>
+                            <li class="add"><img class="add-img" src="images/more.png"></li>
+                            <li class="field">
+                                <div class="select-type">
+                                    <img class="rule-type selected" src="images/allow.png" />
+                                    <img class="rule-type" src="images/deny.png" />
+                                    <img class="rule-type" src="images/info.png" />
+                                    <img class="rule-type" src="images/alert.png" />
+                                </div>
+                                <input class="field-input" type="text"/>
+                                <button class="button-add">Add</button>
                             </li>
-                            <li class="add"><img src="images/more.png"></li>
-                            <li class="field"><input class="field-input" type="text"/></li>
                         </ul>
                     </li>
-                    <li class="add"><img src="images/more.png"></li>
+                    <li class="add"><img class="add-img" src="images/more.png"></li>
                     <li class="field"><input class="field-input" type="text"/></li>
                 </ul>
             </li>
-            <li class="rule info">
-                <img src="images/info.png">Information
-                <ul class="rules nested">
-                    <li class="add"><img src="images/more.png"></li>
-                    <li class="field"><input class="field-input" type="text"/></li>
-                </ul>
-            </li>
-            <li class="add"><img src="images/more.png"></li>
+            <li class="add"><img class="add-img" src="images/more.png"></li>
             <li class="field"><input class="field-input" type="text"/></li>
         </ul>
     </div>
