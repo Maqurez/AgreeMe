@@ -11,6 +11,7 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="css/general.css" />
     <script src="js/main.js"></script>
 </head>
@@ -27,14 +28,47 @@
     <div class="main container">
         <ul class="rules">
             <li class="rule allow">
-                Allow
-                <a href="#">Add rule</a>
+                <img src="images/allow.png">write comments
+                <ul class="rules nested">
+                    <li class="rule alert">
+                        <img src="images/alert.png">insult others
+                        <ul class="rules nested">
+                            <li class="add">...</li>
+                        </ul>
+                    </li>
+                    <li class="add">...</li>
+                </ul>
             </li>
             <li class="rule deny">
-                Deny
-                <a href="#">Add rule</a>
+                <img src="images/deny.png">Something
+                <ul class="rules nested">
+                    <li class="rule alert">
+                        <img src="images/alert.png">Other thing
+                        <ul class="rules nested">
+                            <li class="rule alert">
+                                <img src="images/alert.png">Other other thing
+                                <ul class="rules nested">
+                                    <li class="add">...</li>
+                                    <li class="field"><input class="field-input" type="text"/></li>
+                                </ul>
+                            </li>
+                            <li class="add">...</li>
+                            <li class="field"><input class="field-input" type="text"/></li>
+                        </ul>
+                    </li>
+                    <li class="add">...</li>
+                    <li class="field"><input class="field-input" type="text"/></li>
+                </ul>
             </li>
-            <a href="#">Add rule</a>
+            <li class="rule info">
+                <img src="images/info.png">Information
+                <ul class="rules nested">
+                    <li class="add">...</li>
+                    <li class="field"><input class="field-input" type="text"/></li>
+                </ul>
+            </li>
+            <li class="add">...</li>
+            <li class="field"><input class="field-input" type="text"/></li>
         </ul>
     </div>
 </div>
