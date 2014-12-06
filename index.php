@@ -39,10 +39,10 @@
                             <li class="add"><img class="add-img" src="images/more.png"></li>
                             <li class="field">
                                 <div class="select-type">
-                                    <img class="rule-type selected" src="images/allow.png" />
-                                    <img class="rule-type" src="images/deny.png" />
-                                    <img class="rule-type" src="images/info.png" />
-                                    <img class="rule-type" src="images/alert.png" />
+                                    <img class="rule-type allow selected" src="images/allow.png" />
+                                    <img class="rule-type deny" src="images/deny.png" />
+                                    <img class="rule-type info" src="images/info.png" />
+                                    <img class="rule-type alert" src="images/alert.png" />
                                 </div>
                                 <input class="field-input" type="text"/>
                                 <button class="button-add">Add</button>
@@ -50,11 +50,29 @@
                         </ul>
                     </li>
                     <li class="add"><img class="add-img" src="images/more.png"></li>
-                    <li class="field"><input class="field-input" type="text"/></li>
+                    <li class="field">
+                        <div class="select-type">
+                            <img class="rule-type allow selected" src="images/allow.png" />
+                            <img class="rule-type deny" src="images/deny.png" />
+                            <img class="rule-type info" src="images/info.png" />
+                            <img class="rule-type alert" src="images/alert.png" />
+                        </div>
+                        <input class="field-input" type="text"/>
+                        <button class="button-add">Add</button>
+                    </li>
                 </ul>
             </li>
             <li class="add"><img class="add-img" src="images/more.png"></li>
-            <li class="field"><input class="field-input" type="text"/></li>
+            <li class="field">
+                <div class="select-type">
+                    <img class="rule-type allow selected" src="images/allow.png" />
+                    <img class="rule-type deny" src="images/deny.png" />
+                    <img class="rule-type info" src="images/info.png" />
+                    <img class="rule-type alert" src="images/alert.png" />
+                </div>
+                <input class="field-input" type="text"/>
+                <button class="button-add">Add</button>
+            </li>
         </ul>
     </div>
 </div>
