@@ -6,8 +6,6 @@
  * Time: 10:44 AM
  */
 
-include 'mongoconnect.php';
-
 ?>
 
 <!doctype html>
