@@ -1,5 +1,7 @@
 body {
     font: normal 20px Helvetica;
+    line-height: 25px;
+    background: #f3f3f3;
 }
 ul {
     list-style-type: none;
@@ -12,6 +14,18 @@ img {
     width: 25px;
     height: 25px;
 }
+.app {
+    width: 800px;
+    padding: 10px;
+    margin: 10px auto;
+    background: #fff;
+}
+.header {
+    border-bottom: 1px solid #aaa;
+}
+.logo {
+    text-align: center;
+}
 .hidden {
     display: none;
 }
@@ -19,26 +33,27 @@ img {
     display: block;
 }
 .rule-text {
-    padding-left: 30px;
+    display: block;
+    padding: 0 0 15px 30px;
 }
 .allow>.rule-text {
     background: url(/images/allow.png) no-repeat;
-    background-size: contain;
+    background-size: 25px 25px;
     background-position: 0 0;
 }
 .deny>.rule-text {
     background: url(/images/deny.png) no-repeat;
-    background-size: contain;
+    background-size: 25px 25px;
     background-position: 0 0;
 }
 .alert>.rule-text {
     background: url(/images/alert.png) no-repeat;
-    background-size: contain;
+    background-size: 25px 25px;
     background-position: 0 0;
 }
 .info>.rule-text {
     background: url(/images/info.png) no-repeat;
-    background-size: contain;
+    background-size: 25px 25px;
     background-position: 0 0;
 }
 .container {
@@ -46,8 +61,19 @@ img {
     clear: both;
 }
 .rule-type {
-    border: 1px solid #fff;
+    padding: 3px;
+    border-bottom: 2px solid #fff;
 }
 .selected {
-    border: 1px solid #008;
+    border-bottom: 2px solid #F05637;
+}
+.buttons {
+    text-align: center;
+}
+.button {
+    padding: 6px 25px;
+    background: #F05637;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
 }

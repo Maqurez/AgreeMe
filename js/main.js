@@ -7,6 +7,10 @@ $(document).ready(refresh);
 function refresh() {
     console.log('start refreshing');
 
+    $('.rules').sortable({
+        cancel: ".add,.field"
+    });
+
     $('.add-img').off().on('click', showField);
 
     $('.rule-type').off().on('click', selectType);
@@ -17,18 +21,42 @@ function refresh() {
 
     $('.button-edit').off().on('click', editRule);
 
+    $('.button-delete').off().on('click', deleteRule);
+
+    $('.button-save').off().on('click', save);
+
+    $('.button-load').off().on('click', load);
+
     console.log('end refreshing');
+}
+
+function load() {
+    if (typeof(Storage) !== "undefined") {
+        console.log(localStorage.getItem("list"));
+    }
+}
+
+function save() {
+    if (typeof(Storage) !== "undefined")
+    localStorage.setItem("list", getInfo());
+}
+
+function deleteRule() {
+    console.log("Deleted!");
 }
 
 function editRule() {
     console.log("Edited!");
+    $(this).parent().replaceWith();
 }
 
 function showEdit() {
     console.log("Edit it!");
     var t = $(this).parent().get(0);
-    $(t).removeClass('rule');
-    $(this).parent().append('<li class="field visible"> <div class="select-type"> <img class="rule-type allow" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text" value="' + $(this).text() + '"/> <button class="button-edit">Edit</button> </li>');
+
+    // Add current selected
+
+    $(this).append('<div class="select-type"> <img class="rule-type allow" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text" value="' + $(this).text() + '"/> <button class="button-edit">Edit</button> <button class="button-delete">Delete</button>');
     refresh();
 }
 
@@ -56,12 +84,18 @@ function addRule() {
 }
 
 function temp(t) {
-    t.children().last().append('<ul class="rules nested"><li class="add"><img class="add-img" src="images/more.png"></li><li class="field hidden"><div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text"/> <button class="button-add">Add</button> </li> </ul>');
-    t.append('<li class="add"><img class="add-img" src="images/more.png"></li> <li class="field hidden"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text"/> <button class="button-add">Add</button>');
+    t.children().last().append('<ul class="rules nested"><li class="add"><img class="add-img" src="images/more.png"></li><li class="field hidden"><div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text"/> <button class="button button-add">Add</button> </li> </ul>');
+    t.append('<li class="add"><img class="add-img" src="images/more.png"></li> <li class="field hidden"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text"/> <button class="button button-add">Add</button>');
 }
 
 function getInfo() {
     console.log(JSON.stringify(getList('.main')));
+    userView();
+    return JSON.stringify(getList('.main'));
+}
+
+function userView() {
+    $('body').find('.add, .field').remove();
 }
 
 function getList(root) {
@@ -69,10 +103,7 @@ function getList(root) {
     var result = [];
 
     $('> ul > li.rule', root).each(function () {
-        //console.log($(this).children('.rule-text').text());
-        //console.log($(this).parent().children().length);
         var t = {"value" : $(this).children('.rule-text').text(), "type" : $(this).removeClass('rule')[0].className, "rules" : []};
-        //console.log($(this).children('.rule-text').text());
         if ($(this).children('ul').children().length > 2) {
             t.rules = (getList($(this)));
         }
