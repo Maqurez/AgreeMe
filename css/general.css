@@ -12,10 +12,34 @@ img {
     width: 25px;
     height: 25px;
 }
-.allow {
-}
-.field {
+.hidden {
     display: none;
+}
+.visible {
+    display: block;
+}
+.rule-text {
+    padding-left: 30px;
+}
+.allow>.rule-text {
+    background: url(/images/allow.png) no-repeat;
+    background-size: contain;
+    background-position: 0 0;
+}
+.deny>.rule-text {
+    background: url(/images/deny.png) no-repeat;
+    background-size: contain;
+    background-position: 0 0;
+}
+.alert>.rule-text {
+    background: url(/images/alert.png) no-repeat;
+    background-size: contain;
+    background-position: 0 0;
+}
+.info>.rule-text {
+    background: url(/images/info.png) no-repeat;
+    background-size: contain;
+    background-position: 0 0;
 }
 .container {
     overflow: hidden;
