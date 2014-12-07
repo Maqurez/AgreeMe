@@ -6,5 +6,7 @@
  * Time: 12:12 PM
  */
 
-$m = new MongoClient();
-$m->selectDB("agreeme");
+$m = new MongoClient("");
+$db = $m->selectDB("agreeme");
+//$users = $db->users;
+$agreements = $db->agreements;

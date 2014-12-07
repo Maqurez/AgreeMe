@@ -2,13 +2,15 @@
  * Created by Maqurez on 12/6/2014.
  */
 
+var editor = '';
+
 $(document).ready(refresh);
 
 function refresh() {
     console.log('start refreshing');
 
     $('.rules').sortable({
-        cancel: ".add,.field"
+        cancel: ".add,.field,.editor"
     });
 
     $('.add-img').off().on('click', showField);
@@ -16,8 +18,6 @@ function refresh() {
     $('.rule-type').off().on('click', selectType);
 
     $('.button-add').off().on('click', addRule);
-
-    $('.rule-text').off().on('click', showEdit);
 
     $('.button-edit').off().on('click', editRule);
 
@@ -27,7 +27,21 @@ function refresh() {
 
     $('.button-load').off().on('click', load);
 
+    $('.button-more').off().on('click', toggleEditor);
+
+    $('.button-view').off().on('click', changeView);
+
+    //$('.rule-text').off().on('dblclick', toggleEditor);
+
     console.log('end refreshing');
+}
+
+function changeView() {
+    $('body').find('.editor').toggle();
+}
+
+function toggleEditor() {
+    $(this).parent().children('.editor-inner').toggle();
 }
 
 function load() {
@@ -37,8 +51,24 @@ function load() {
 }
 
 function save() {
-    if (typeof(Storage) !== "undefined")
-    localStorage.setItem("list", getInfo());
+    var d = getInfo();
+    if (d.title == "") {
+        alert("Need title!");
+    }
+    else if (d.rules.length == 0) {
+        alert("Need at least one rule!");
+    }
+    else {
+        $.ajax({
+            type: "POST",
+            url: "testconnection.php",
+            data: d
+        })
+            .done(function (msg) {
+                alert("Data Saved: " + msg);
+                console.log($)
+            });
+    }
 }
 
 function deleteRule() {
@@ -47,17 +77,7 @@ function deleteRule() {
 
 function editRule() {
     console.log("Edited!");
-    $(this).parent().replaceWith();
-}
-
-function showEdit() {
-    console.log("Edit it!");
-    var t = $(this).parent().get(0);
-
-    // Add current selected
-
-    $(this).append('<div class="select-type"> <img class="rule-type allow" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text" value="' + $(this).text() + '"/> <button class="button-edit">Edit</button> <button class="button-delete">Delete</button>');
-    refresh();
+    $(this).parent('.editor').replaceWith();
 }
 
 function showField() {
@@ -71,31 +91,29 @@ function selectType() {
 }
 
 function addRule() {
-    var t = $($(this).parent().parent());
-    var img = t.children('.field').children('.select-type').children('.selected')[0].src;
-    var cl = $(t).children('.field').children('.select-type').children('.selected').removeClass('selected rule-type')[0].className;
-    console.log(cl);
-    console.log("Rule added!");
-    t.append('<li class="rule ' + cl + '"><span class="rule-text">' + $(t).children('.field').children('.field-input')[0].value + '</span></li>');
-    t.children('.field').remove();
-    t.children('.add').remove();
-    temp(t);
+    var list = $($(this).parent().parent().parent());
+    var item = document.createElement('li');
+    var innertext = document.createElement('span');
+    innertext.classList.add('rule-text');
+    var selectedImg = $(this).parent().children('.select-type').children('.selected')[0].classList[1];
+    item.classList.add('rule');
+    item.classList.add(selectedImg);
+    innertext.appendChild(document.createTextNode($(this).parent().children(':input').val()));
+    item.appendChild(innertext);
+    $($(this).parent().parent().before(item));
+    $(item).append('<ul class="rules nested"><li class="editor"> <div class="button-more"><img src="images/more.png"/></div> <div class="editor-inner" style="display: none;"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="editor-input" type="text" maxlength="200"/> <button class="button button-add">Add</button> <button class="button button-cancel">Cancel</button> </div> </li></ul>');
+    $(this).parent().hide();
+    $(this).parent().children(':input').val("");
     refresh();
 }
 
-function temp(t) {
-    t.children().last().append('<ul class="rules nested"><li class="add"><img class="add-img" src="images/more.png"></li><li class="field hidden"><div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text"/> <button class="button button-add">Add</button> </li> </ul>');
-    t.append('<li class="add"><img class="add-img" src="images/more.png"></li> <li class="field hidden"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="field-input" type="text"/> <button class="button button-add">Add</button>');
-}
-
 function getInfo() {
-    console.log(JSON.stringify(getList('.main')));
-    userView();
-    return JSON.stringify(getList('.main'));
-}
-
-function userView() {
-    $('body').find('.add, .field').remove();
+    var list = getList('.main');
+    var title = $('.title-input').val();
+    var comp = "GMD";
+    var agree = {"title": title, "owner": comp, "rules":list};
+    //$('#request').val(JSON.stringify(agree));
+    return(agree);
 }
 
 function getList(root) {
@@ -103,13 +121,14 @@ function getList(root) {
     var result = [];
 
     $('> ul > li.rule', root).each(function () {
-        var t = {"value" : $(this).children('.rule-text').text(), "type" : $(this).removeClass('rule')[0].className, "rules" : []};
-        if ($(this).children('ul').children().length > 2) {
+        var t = {"value" : $(this).children('.rule-text').text(), "type" : $(this)[0].classList[1], "rules" : []};
+        if ($(this).children('ul').children('.rule').length > 0) {
             t.rules = (getList($(this)));
         }
         else {
             $(this).next().val();
         }
+        console.log(t);
         result.push(t);
     });
     return(result);

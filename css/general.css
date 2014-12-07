@@ -15,7 +15,7 @@ img {
     height: 25px;
 }
 .app {
-    width: 800px;
+    width: 1000px;
     padding: 10px;
     margin: 10px auto;
     background: #fff;
@@ -25,6 +25,22 @@ img {
 }
 .logo {
     text-align: center;
+    font: bold 24px Calibri;
+}
+.logo img {
+    width: auto;
+    height: 50px;
+}
+.title-input {
+    margin-top: 15px;
+    font: normal 28px Calibri;
+    text-align: center;
+    border: none;
+    width: 100%;
+    border-bottom: 2px solid #888;
+}
+.title-input:focus,.button:focus {
+    outline: 0;
 }
 .hidden {
     display: none;
@@ -76,4 +92,13 @@ img {
     color: #fff;
     border-radius: 20px;
     border: none;
+}
+
+/* EDITOR */
+
+.editor {
+
+}
+.editor-input {
+    width: 50%;
 }
