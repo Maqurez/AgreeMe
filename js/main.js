@@ -46,17 +46,22 @@ function toggleEditor() {
 }
 
 function load() {
-    var id = "5484b548d78834c94b8b4568";
-    $.ajax({
-        type: "GET",
-        url: "testconnection.php",
-        data: {id : id}
-    })
-        .done(function (html) {
-            var res = JSON.parse(html);
-            console.log(res);
-            loadInfo(res);
-        });
+    var id = $('#list-id').val();
+    if (id != "") {
+        $.ajax({
+            type: "GET",
+            url: "testconnection.php",
+            data: {id: id}
+        })
+            .done(function (html) {
+                var res = JSON.parse(html);
+                console.log(res);
+                loadInfo(res);
+            });
+    }
+    else {
+        alert("Need id!");
+    }
 }
 
 function save() {
@@ -74,7 +79,9 @@ function save() {
             data: d
         })
             .done(function (msg) {
-                alert("Data Saved: " + msg);
+                $('#list-id').val(msg);
+                alert("Data saved! " + msg);
+
             });
     }
 }

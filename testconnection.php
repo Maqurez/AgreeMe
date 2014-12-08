@@ -13,6 +13,7 @@ $agreements = $db->selectCollection("agreements");
 if (!empty($_POST)) {
     $agreement = $_POST;
     $agreements->insert($agreement);
+    echo $agreement["_id"];
 }
 if (!empty($_GET)) {
     $agreement = $_GET['id'];
