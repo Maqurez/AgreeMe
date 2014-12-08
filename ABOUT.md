@@ -4,4 +4,6 @@ Tool for creation nice-looking Licence Agreement & etc.
 
 ##
 
-Create your agreement easy. 
+Create your agreement easy.
+
+!(http://d.pr/i/QGMn/29kTupvY)

@@ -41,7 +41,6 @@
                     </div>
                     <input class="editor-input" type="text" maxlength="200"/>
                     <button class="button button-add">Add</button>
-                    <button class="button button-cancel">Cancel</button>
                 </div>
             </li>
         </ul>
@@ -54,7 +53,6 @@
     </div>
     <form method="post" action="testconnection.php">
         <input id="request" name="request" type="text" hidden="hidden"/>
-        <button type="submit">Submit</button>
     </form>
 </div>
 </body>

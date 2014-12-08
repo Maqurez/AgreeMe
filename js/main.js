@@ -2,7 +2,8 @@
  * Created by Maqurez on 12/6/2014.
  */
 
-var editor = '';
+var editor = '<li class="editor"> <div class="button-more"><img src="images/more.png"/></div> <div class="editor-inner" style="display: none;"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="editor-input" type="text" maxlength="200"/> <button class="button button-add">Add</button> </li>';
+var editorlist = '<ul class="rules nested">' + editor + '</ul>';
 
 $(document).ready(refresh);
 
@@ -108,7 +109,7 @@ function addRule() {
     innertext.appendChild(document.createTextNode($(this).parent().children(':input').val()));
     item.appendChild(innertext);
     $($(this).parent().parent().before(item));
-    $(item).append('<ul class="rules nested"><li class="editor"> <div class="button-more"><img src="images/more.png"/></div> <div class="editor-inner" style="display: none;"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="editor-input" type="text" maxlength="200"/> <button class="button button-add">Add</button> <button class="button button-cancel">Cancel</button> </div> </li></ul>');
+    $(item).append(editorlist);
     $(this).parent().hide();
     $(this).parent().children(':input').val("");
     refresh();
@@ -177,14 +178,13 @@ function appendEditor(root) {
     $('> ul li.rule', root).each(function() {
         if ($(this).children('ul').length > 0) {
             appendEditor($(this));
-            var ed = '<li class="editor"> <div class="button-more"><img src="images/more.png"/></div> <div class="editor-inner" style="display: none;"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="editor-input" type="text" maxlength="200"/> <button class="button button-add">Add</button> <button class="button button-cancel">Cancel</button> </div> </li>';
             var hl = $(this).children('ul')[0];
             if ($(hl).children('.editor').length < 1) {
-                $(hl).append(ed);
+                $(hl).append(editor);
             }
         }
         else {
-            $(this).append('<ul class="rules nested"><li class="editor"> <div class="button-more"><img src="images/more.png"/></div> <div class="editor-inner" style="display: none;"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="editor-input" type="text" maxlength="200"/> <button class="button button-add">Add</button> <button class="button button-cancel">Cancel</button> </div> </li></ul>');
+            $(this).append(editorlist);
         }
     });
 }
