@@ -10,11 +10,21 @@ $m = new MongoClient("");
 $db = $m->selectDB("agreeme");
 $agreements = $db->selectCollection("agreements");
 
+if (!empty($_POST)) {
+    $agreement = $_POST;
+    $agreements->insert($agreement);
+}
+if (!empty($_GET)) {
+    $agreement = $_GET['id'];
+    $crit = array("_id" => new MongoId($agreement));
+    echo json_encode($agreements->findOne($crit), JSON_UNESCAPED_UNICODE);
+}
+
 //echo $_POST['request'];
-$agreement = $_POST;
+
 //echo $_POST['json'];
 
-$agreements->insert($agreement);
+
 
 //$users = $db->users;
 

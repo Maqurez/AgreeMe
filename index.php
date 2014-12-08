@@ -48,10 +48,10 @@
     </div>
     <div class="buttons container">
         <button class="button button-save" type="button">Save</button>
+        <button class="button button-select" type="button">Select list</button>
         <button class="button button-load" type="button">Load</button>
         <button class="button button-view" type="button">Preview</button>
     </div>
-    <div id="out"></div>
     <form method="post" action="testconnection.php">
         <input id="request" name="request" type="text" hidden="hidden"/>
         <button type="submit">Submit</button>

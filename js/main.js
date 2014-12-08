@@ -45,9 +45,17 @@ function toggleEditor() {
 }
 
 function load() {
-    if (typeof(Storage) !== "undefined") {
-        console.log(localStorage.getItem("list"));
-    }
+    var id = "5484b548d78834c94b8b4568";
+    $.ajax({
+        type: "GET",
+        url: "testconnection.php",
+        data: {id : id}
+    })
+        .done(function (html) {
+            var res = JSON.parse(html);
+            console.log(res);
+            loadInfo(res);
+        });
 }
 
 function save() {
@@ -66,7 +74,6 @@ function save() {
         })
             .done(function (msg) {
                 alert("Data Saved: " + msg);
-                console.log($)
             });
     }
 }
@@ -116,6 +123,15 @@ function getInfo() {
     return(agree);
 }
 
+function loadInfo(infoObj) {
+    $('.title-input').val(infoObj.title);
+    //console.log(infoObj.rules);
+    setList('.main', infoObj.rules);
+    appendEditor('.main');
+    $('.main').children('ul').children('.editor').insertAfter('.rule:last');
+    refresh();
+}
+
 function getList(root) {
     console.log("start map");
     var result = [];
@@ -132,4 +148,43 @@ function getList(root) {
         result.push(t);
     });
     return(result);
+}
+
+function setList(root, list) {
+    //console.log("start list creation");
+    if (root != '.main') {
+        var hlist = document.createElement('ul');
+        hlist.classList.add('rules');
+        $(root).append(hlist);
+    }
+    $(list).each(function() {
+        //console.log($(this));
+        var item = document.createElement('li');
+        var innertext = document.createElement('span');
+        innertext.classList.add('rule-text');
+        item.classList.add('rule');
+        item.classList.add($(this)[0].type);
+        innertext.appendChild(document.createTextNode($(this)[0].value));
+        item.appendChild(innertext);
+        $('> ul', root).append(item);
+        if ($(this)[0].rules !== undefined) {
+            setList(item, $(this)[0].rules);
+        }
+    });
+}
+
+function appendEditor(root) {
+    $('> ul li.rule', root).each(function() {
+        if ($(this).children('ul').length > 0) {
+            appendEditor($(this));
+            var ed = '<li class="editor"> <div class="button-more"><img src="images/more.png"/></div> <div class="editor-inner" style="display: none;"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="editor-input" type="text" maxlength="200"/> <button class="button button-add">Add</button> <button class="button button-cancel">Cancel</button> </div> </li>';
+            var hl = $(this).children('ul')[0];
+            if ($(hl).children('.editor').length < 1) {
+                $(hl).append(ed);
+            }
+        }
+        else {
+            $(this).append('<ul class="rules nested"><li class="editor"> <div class="button-more"><img src="images/more.png"/></div> <div class="editor-inner" style="display: none;"> <div class="select-type"> <img class="rule-type allow selected" src="images/allow.png" /> <img class="rule-type deny" src="images/deny.png" /> <img class="rule-type info" src="images/info.png" /> <img class="rule-type alert" src="images/alert.png" /> </div> <input class="editor-input" type="text" maxlength="200"/> <button class="button button-add">Add</button> <button class="button button-cancel">Cancel</button> </div> </li></ul>');
+        }
+    });
 }
